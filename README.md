@@ -28,8 +28,11 @@ Membuat fungsi `@BindingAdapter("app:backgroundColor")` kustom untuk mengatur wa
 
 ## Screenshot
 
-<!-- TODO: Tambahkan screenshot aplikasi saat dijalankan -->
-![Screenshot Aplikasi](screenshot_app.png)
+![Tampilan Grid dengan Header dan Data](ss1.png)
+*Tampilan utama: Grid 2 kolom dengan header (full-width) dan item data*
+
+![Data setelah refresh menggunakan ListAdapter + DiffUtil](ss2.png)
+*Data diperbarui dengan animasi presisi berkat DiffUtil*
 
 ## Penjelasan
 
