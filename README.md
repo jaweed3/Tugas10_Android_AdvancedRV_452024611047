@@ -9,34 +9,34 @@
 
 ## Fitur
 
-1. **ListAdapter + DiffUtil** — Adapter pake ListAdapter, jadi pas data di-update, yang dirender ulang cuma item yang beneran berubah. Nggak kayak adapter biasa yang notifyDataSetChanged dan reload semua.
+1. **ListAdapter + DiffUtil** - Adapter pake ListAdapter, jadi pas data di-update, yang dirender ulang cuma item yang beneran berubah. Nggak kayak adapter biasa yang notifyDataSetChanged dan reload semua.
 
-2. **Multiple View Types** — Ada 2 jenis item:
-   - **Header** — full-width (span 2), background warna solid, buat judul kategori
-   - **Data** — 1 kolom (span 1), ada lingkaran warna + label
+2. **Multiple View Types** - Ada 2 jenis item:
+   - **Header** - full-width (span 2), background warna solid, buat judul kategori
+   - **Data** - 1 kolom (span 1), ada lingkaran warna + label
 
-3. **GridLayoutManager + SpanSizeLookup** — Grid 2 kolom. Header ambil 2 span (full-width), data item ambil 1 span.
+3. **GridLayoutManager + SpanSizeLookup** - Grid 2 kolom. Header ambil 2 span (full-width), data item ambil 1 span.
 
-4. **Custom BindingAdapter** — Bikin `@BindingAdapter("app:backgroundColor")` biar bisa set background warna langsung dari XML.
+4. **Custom BindingAdapter** - Bikin `@BindingAdapter("app:backgroundColor")` biar bisa set background warna langsung dari XML.
 
-5. **ViewHolder Factory** — Tiap ViewHolder punya companion object `create()` buat nge-inflate layout, biar konstruktornya bersih.
+5. **ViewHolder Factory** - Tiap ViewHolder punya companion object `create()` buat nge-inflate layout, biar konstruktornya bersih.
 
 ## Screenshot
 
-![Tampilan utama grid](ss1.png)
+![Tampilan utama grid](ss1.jpg)
 *GridView 2 kolom, header warna biru/hijau/oranye/ungu*
 
-![Setelah refresh](ss2.png)
+![Setelah refresh](ss2.jpg)
 *Data berubah, item yg sama nggak ke-rebind*
 
-## RecyclerView.Adapter vs ListAdapter — Bedanya?
+## RecyclerView.Adapter vs ListAdapter - Bedanya?
 
 **Adapter biasa** pas data berubah bakal manggil `notifyDataSetChanged()`. Efeknya? Semua item yang kelihatan di layar di-render ulang dari nol. Padahal mungkin cuma 1 item yang berubah. Boros banget.
 
 **ListAdapter** pake `DiffUtil.ItemCallback` yang kerja di background thread buat ngitung mana item yang beda antara list lama dan baru. Hasilnya:
-- `notifyItemChanged()` — cuma item yang berubah aja yang di-rebind
-- `notifyItemInserted()` — item baru dapet animasi masuk
-- `notifyItemRemoved()` — item ilang dapet animasi keluar
+- `notifyItemChanged()` - cuma item yang berubah aja yang di-rebind
+- `notifyItemInserted()` - item baru dapet animasi masuk
+- `notifyItemRemoved()` - item ilang dapet animasi keluar
 
 Jadi pas tombol **Refresh** diteken, DiffUtil cuma touch item-item yang beda. Sisanya diemin aja. Efisien banget apalagi kalo datanya banyak.
 
